@@ -1,0 +1,192 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+void main() {
+    runApp(MyApp());
+}
+
+class Person{
+  String? name ;
+  String? image;
+  String? message;
+  String? date;
+  Person({this.image,this.name,this.date,this.message});
+}
+
+class MyApp extends StatelessWidget {
+  MyApp({Key? key}) : super(key: key);
+
+  List<Person>person =[
+    Person(
+      name:'Kriss Benwat',
+      image: 'https://cdn.imgbin.com/2/4/15/imgbin-computer-icons-portable-network-graphics-avatar-icon-design-avatar-DsZ54Du30hTrKfxBG5PbwvzgE.jpg',
+      message: 'Good to know',
+      date: 'Today',),
+    Person(
+      name:'Rqzi Makarov',
+      image: 'https://cdn.imgbin.com/2/4/15/imgbin-computer-icons-portable-network-graphics-avatar-icon-design-avatar-DsZ54Du30hTrKfxBG5PbwvzgE.jpg',
+      message: 'its been a while',
+      date: 'Today',),
+    Person(
+      name:'Gustav Lemelo',
+      image: 'https://cdn.imgbin.com/2/4/15/imgbin-computer-icons-portable-network-graphics-avatar-icon-design-avatar-DsZ54Du30hTrKfxBG5PbwvzgE.jpg',
+      message: 'Hey,Where are you?',
+      date: 'Yesterday',),
+
+    Person(
+      name:'Bob Ryder',
+      image: 'https://cdn.imgbin.com/2/4/15/imgbin-computer-icons-portable-network-graphics-avatar-icon-design-avatar-DsZ54Du30hTrKfxBG5PbwvzgE.jpg',
+      message: 'its over!',
+      date: '28 Jan',),
+
+    Person(
+      name:'Ken Simada',
+      image: 'https://cdn.imgbin.com/2/4/15/imgbin-computer-icons-portable-network-graphics-avatar-icon-design-avatar-DsZ54Du30hTrKfxBG5PbwvzgE.jpg',
+      message: 'Your Welcome!',
+      date: '24 Jan',),
+
+    Person(
+      name:'Emma Walkins',
+      image: 'https://cdn.imgbin.com/2/4/15/imgbin-computer-icons-portable-network-graphics-avatar-icon-design-avatar-DsZ54Du30hTrKfxBG5PbwvzgE.jpg',
+      message: 'I am going out!',
+      date: '19 Jan',),
+
+    Person(
+      name:'Glibert Hammirway',
+      image: 'https://cdn.imgbin.com/2/4/15/imgbin-computer-icons-portable-network-graphics-avatar-icon-design-avatar-DsZ54Du30hTrKfxBG5PbwvzgE.jpg',
+      message: 'Just attach the image and send it',
+      date: '12 Jan',),
+
+    Person(
+      name:'Bella Hammers',
+      image: 'https://cdn.imgbin.com/2/4/15/imgbin-computer-icons-portable-network-graphics-avatar-icon-design-avatar-DsZ54Du30hTrKfxBG5PbwvzgE.jpg',
+      message: 'The UI is sexy',
+      date: '5 Jan',),
+  ];
+
+
+  Widget template(e)
+  {
+    return Card(
+      elevation: 0.0,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          children: <Widget>[
+            CircleAvatar(
+              backgroundImage: NetworkImage('${e.image}'),
+              radius: 30.0,
+            ),
+            SizedBox(width: 25.0,),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(e.name),
+                  SizedBox(height: 5.0,),
+                  Text(
+                    e.message,
+                    style: TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            Text(
+              e.date,
+            ),
+          ],
+        ),
+      ),
+
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home:Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: Text(
+            'Conversations',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 33.0,
+              fontWeight: FontWeight.bold,
+            ),
+
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 10.0, 8.0, 10.0),
+              child: FlatButton.icon(
+                  onPressed: (){},
+                  icon: Icon(Icons.add),
+                  label: Text('Add New'),
+                  color: Colors.pinkAccent[100],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(40.0),
+                  ),
+              ),
+            ),
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                child: SizedBox(
+                  height: 50.0,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.search,),
+                      fillColor: Colors.grey[100],
+                      filled: true,
+                      hintText: 'Search...',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(50.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(50.0),
+                    ),
+
+                  ),
+                ),
+              ),
+              ),
+              Column(
+                children: person.map((e) => template(e)).toList(),
+              ),
+            ],
+          ),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.chat ,color: Colors.red,),
+              label: 'Chats',
+            ),
+
+            BottomNavigationBarItem(
+              icon: Icon(IconData(0xf027a, fontFamily: 'MaterialIcons')),
+              label: 'Channels',
+            ),
+
+            BottomNavigationBarItem(
+              icon: Icon(IconData(0xf521, fontFamily: 'MaterialIcons')),
+              label: 'Profile',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
